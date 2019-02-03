@@ -243,25 +243,20 @@ here is the resized image (200x200), but with the boundies box drawed:
 ![box_image](images_example/boxed_IMG_20181109_165212.jpg)
 
 ## Parameters
-To know more about parameters use `python bot.py -h`:
+To know more about parameters use `python main.py -h`:
 ```
-usage: bot.py [-h] -e EMAIL -p PASSWORD -k KEYWORDS [-i INITIAL_PAGE]              [-las LAST_PAGE] [-c CHROME_DIR] [-lan LANGUAGE]
+usage: main.py [-h] -p DATASET_PATH -o OUTPUT_PATH -x X -y Y
+               [-s SAVE_BOX_IMAGES]
 
 optional arguments:
   -h, --help            show this help message and exit
-  -e EMAIL, --email EMAIL
-                        Your linkedin e-mail
-  -p PASSWORD, --password PASSWORD
-                        Your linkedin password
-  -k KEYWORDS, --keywords KEYWORDS
-                        Your search word
-  -i INITIAL_PAGE, --initial_page INITIAL_PAGE
-                        page's number where will be started the crawller in
-                        search page
-  -las LAST_PAGE, --last_page LAST_PAGE
-                        Quantity of pages to crawller in search
-  -c CHROME_DIR, --chrome_dir CHROME_DIR
-                        path to google chrome bin, example: /bin/google-chrome
-  -lan LANGUAGE, --language LANGUAGE
-                        accept pt-br or en(default)
+  -p DATASET_PATH, --path DATASET_PATH
+                        Path to dataset data ?(image and annotations).
+  -o OUTPUT_PATH, --output OUTPUT_PATH
+                        Path that will be saved the resized dataset
+  -x X, --new_x X       The new x images size
+  -y Y, --new_y Y       The new y images size
+  -s SAVE_BOX_IMAGES, --save_box_images SAVE_BOX_IMAGES
+                        If True, it will save the resized image and a drawed
+                        image with the boxes in the images
 ```
