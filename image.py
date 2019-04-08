@@ -6,21 +6,19 @@ import xml.etree.ElementTree as ET
 
 
 def process_image(file_path, output_path, x, y, save_box_images):
-    (base_dir, file_name) = get_file_name(file_path)
+    (base_dir, file_name, ext) = get_file_name(file_path)
+    image_path = '{}/{}.{}'.format(base_dir, file_name, ext)
+    xml = '{}/{}.xml'.format(base_dir, file_name)
     try:
-
-        jpg = '{}/{}.jpg'.format(base_dir, file_name)
-        xml = '{}/{}.xml'.format(base_dir, file_name)
-
         resize(
-            jpg,
+            image_path,
             xml,
             (x, y),
             output_path,
             save_box_images=save_box_images,
         )
     except Exception as e:
-        print('[ERROR] error with {}\n file: {}'.format(jpg, e))
+        print('[ERROR] error with {}\n file: {}'.format(image_path, e))
         print('--------------------------------------------------')
 
 
@@ -46,6 +44,11 @@ def resize(image_path,
 
     newBoxes = []
     xmlRoot = ET.parse(xml_path).getroot()
+    xmlRoot.find('filename').text = image_path.split('/')[-1]
+    size_node = xmlRoot.find('size')
+    size_node.find('width').text = str(newSize[0])
+    size_node.find('height').text = str(newSize[1])
+
     for member in xmlRoot.findall('object'):
         bndbox = member.find('bndbox')
 
@@ -68,11 +71,11 @@ def resize(image_path,
             int(float(ymax.text))
             ])
 
-    (_, file_name) = get_file_name(image_path)
-    cv2.imwrite(os.path.join(output_path, '_new'.join([file_name, '.jpg'])), image)
+    (_, file_name, ext) = get_file_name(image_path)
+    cv2.imwrite(os.path.join(output_path, '.'.join([file_name, ext])), image)
 
     tree = ET.ElementTree(xmlRoot)
-    tree.write('{}/{}_new.xml'.format(output_path, file_name.split('.')[0]))
+    tree.write('{}/{}.xml'.format(output_path, file_name, ext))
     if int(save_box_images):
-        save_path = '{}/boxes_images/boxed_{}'.format(output_path, ''.join([file_name, '.jpg']))
+        save_path = '{}/boxes_images/boxed_{}'.format(output_path, ''.join([file_name, '.', ext]))
         draw_box(newBoxes, image, save_path)
