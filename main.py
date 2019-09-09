@@ -43,7 +43,7 @@ parser.add_argument(
     default=0
 )
 
-IMAGE_FORMATS = ('.jpeg', '.png', '.jpg')
+IMAGE_FORMATS = ('.jpeg', '.JPEG', '.png', '.PNG', '.jpg', '.JPG')
 
 args = parser.parse_args()
 
