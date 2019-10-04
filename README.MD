@@ -1,5 +1,5 @@
 # Resize-pascal-voc
-It's a package to resize ALL your dataset images (into local folder) and change the pascal_VOC coodinates in your .xml file
+It's a package for resizing ALL your dataset images (into local folder) and changing the pascal_VOC coodinates in your `.xml` files.
 
 # Index
 
@@ -22,7 +22,7 @@ It's a package to resize ALL your dataset images (into local folder) and change 
 - If save_box_images = 1, draw the boundies box in the resized image and save it in an other file(output_path/boxes_images/))
 
 ## Warnings
-1º: Don't worry about if you has a big folder structure with many folders inside many folders, the package will walk recursively in your dataset folder and recreate the same structure into output_path.
+1º: Don't worry if you have a big folder structure with many nested folders, the package will walk recursively in your dataset folder and recreate the same structure into output_path.
 
 2º: The .jpg and .xml files must be in the same folder
 
@@ -238,7 +238,7 @@ Here is the resized image (200x200) and new xml:
 
 ### Boundies box image
 
-here is the resized image (200x200), but with the boundies box drawed:
+Here is a resized image (200x200), but with the boundies box drawed:
 
 ![box_image](images_example/boxed_IMG_20181109_165212.jpg)
 
