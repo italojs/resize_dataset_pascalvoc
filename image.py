@@ -3,9 +3,10 @@ import cv2
 import numpy as np
 from utils import get_file_name
 import xml.etree.ElementTree as ET
+from math import floor
 
 
-def process_image(file_path, output_path, x, y, save_box_images):
+def process_image(file_path, output_path, x, y, save_box_images, ratio):
     (base_dir, file_name, ext) = get_file_name(file_path)
     image_path = '{}/{}.{}'.format(base_dir, file_name, ext)
     xml = '{}/{}.xml'.format(base_dir, file_name)
@@ -15,7 +16,8 @@ def process_image(file_path, output_path, x, y, save_box_images):
             xml,
             (x, y),
             output_path,
-            save_box_images=save_box_images,
+            ratio,
+            save_box_images=save_box_images
         )
     except Exception as e:
         print('[ERROR] error with {}\n file: {}'.format(image_path, e))
@@ -32,13 +34,22 @@ def resize(image_path,
            xml_path,
            newSize,
            output_path,
+           ratio,
            save_box_images=False,
-           verbose=False):
+           verbose=False
+           ):
 
     image = cv2.imread(image_path)
 
-    scale_x = newSize[0] / image.shape[1]
-    scale_y = newSize[1] / image.shape[0]
+    if ratio is None:
+        scale_x = newSize[0] / image.shape[1]
+        scale_y = newSize[1] / image.shape[0]
+    
+    else:
+        newSize[0] = floor(image.shape[1] * newSize[0])
+        newSize[1] = floor(image.shape[0] * newSize[0])
+        scale_x = newSize[0] / image.shape[1]
+        scale_y = newSize[1] / image.shape[0]
 
     image = cv2.resize(image, (newSize[0], newSize[1]))
 

@@ -35,6 +35,15 @@ parser.add_argument(
     help='The new y images size',
     required=True
 )
+
+parser.add_argument(
+    '-r',
+    '--ratio',
+    dest='ratio',
+    help='If new sizes are ratio instead of definite size',
+    required=False
+)
+
 parser.add_argument(
     '-s',
     '--save_box_images',
@@ -60,4 +69,4 @@ for root, _, files in os.walk(args.dataset_path):
         for file in files:
             if file.endswith(IMAGE_FORMATS):
                 file_path = os.path.join(root, file)
-                process_image(file_path, output_path, int(args.x),int(args.y), args.save_box_images)
+                process_image(file_path, output_path, int(args.x),int(args.y), args.save_box_images, args.ratio)
