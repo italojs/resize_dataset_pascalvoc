@@ -48,7 +48,8 @@ IMAGE_FORMATS = ('.jpeg', '.JPEG', '.png', '.PNG', '.jpg', '.JPG')
 args = parser.parse_args()
 
 create_path(args.output_path)
-create_path(''.join([args.output_path, '/boxes_images']))
+if int(args.save_box_images):
+    create_path(''.join([args.output_path, '/boxes_images']))
 
 args.dataset_path = add_end_slash(args.dataset_path)
 args.output_path = add_end_slash(args.output_path)
