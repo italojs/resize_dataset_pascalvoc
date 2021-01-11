@@ -57,10 +57,10 @@ def resize(image_path,
         xmax = bndbox.find('xmax')
         ymax = bndbox.find('ymax')
         
-        xmin.text = str(np.round(int(float(xmin.text)) * scale_x))
-        ymin.text = str(np.round(int(float(ymin.text)) * scale_y))
-        xmax.text = str(np.round(int(float(xmax.text)) * scale_x))
-        ymax.text = str(np.round(int(float(ymax.text)) * scale_y))
+        xmin.text = str(int(np.round(float(xmin.text) * scale_x)))
+        ymin.text = str(int(np.round(float(ymin.text) * scale_y)))
+        xmax.text = str(int(np.round(float(xmax.text) * scale_x)))
+        ymax.text = str(int(np.round(float(ymax.text) * scale_y)))
 
         newBoxes.append([
             1,
