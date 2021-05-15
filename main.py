@@ -25,22 +25,22 @@ parser.add_argument(
     '-x',
     '--new_x',
     dest='x',
-    help='The new x images size',
+    help='The new x images size / scale / percentage / target',
     required=True
 )
 parser.add_argument(
     '-y',
     '--new_y',
     dest='y',
-    help='The new y images size',
+    help='The new y images size / scale / percentage / target',
     required=True
 )
 
 parser.add_argument(
-    '-r',
-    '--ratio',
-    dest='ratio',
-    help='If new sizes are ratio instead of definite size',
+    '-m',
+    '--mode',
+    dest='mode',
+    help='Resize mode: size, scale, percentage or target',
     required=False
 )
 
@@ -70,4 +70,4 @@ for root, _, files in os.walk(args.dataset_path):
         for file in files:
             if file.endswith(IMAGE_FORMATS):
                 file_path = os.path.join(root, file)
-                process_image(file_path, output_path, int(args.x),int(args.y), args.save_box_images, args.ratio)
+                process_image(file_path, output_path, args.x, args.y, args.save_box_images, args.mode)
