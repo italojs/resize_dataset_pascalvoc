@@ -245,18 +245,15 @@ Here is a resized image (200x200), but with the boundies box drawed:
 ## Parameters
 To know more about parameters use `python main.py -h`:
 ```
-usage: main.py [-h] -p DATASET_PATH -o OUTPUT_PATH -x X -y Y
-               [-s SAVE_BOX_IMAGES]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p DATASET_PATH, --path DATASET_PATH
-                        Path to dataset data ?(image and annotations).
-  -o OUTPUT_PATH, --output OUTPUT_PATH
-                        Path that will be saved the resized dataset
-  -x X, --new_x X       The new x images size
-  -y Y, --new_y Y       The new y images size
-  -s SAVE_BOX_IMAGES, --save_box_images SAVE_BOX_IMAGES
-                        If True, it will save the resized image and a drawed
-                        image with the boxes in the images
+usage: main.py [-h] -p DATASET_PATH -o OUTPUT_PATH -x X -y Y [-m MODE] [-s SAVE_BOX_IMAGES]
 ```
+
+Parameter|Description
+-|-
+  **-h**, **--help** | Show this help message and exit
+  **-p** **--path** *DATASET_PATH* | Path to dataset data ?(image and annotations).
+  **-o** **--output** *OUTPUT_PATH* | Path that will be saved the resized dataset
+  **-x** **--new_x** *X* | The new x images size / scale / percentage / target
+  **-y** **--new_y** *Y* | The new y images size / scale / percentage / target
+  **-m** **--mode** *MODE* | The resize mode: size, scale, percentage or target
+  **-s** **--save_box_images** *SAVE_BOX_IMAGES* | If True, it will save the resized image and a drawn image with the boxes in the images
