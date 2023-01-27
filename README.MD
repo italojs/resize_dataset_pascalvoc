@@ -7,12 +7,13 @@ It's a package for resizing ALL your dataset images (into local folder) and chan
 - [Warnings](#Warnings)
 - [Install requirements](#Install-requirements)
 - [Usage](#Usage)
-- [Example](E#xample)
+- [Example](#Example)
 - [Folder structure example](#Folder-structure-example)
 - [Results](#Results)
     - [Original Image](#Original-Image)
     - [Resized image](#Resized-image)
     - [Boundies box image](#Boundies-box-image)
+    - [The calculus behind the scenes](#The-Calculus-Behind-the-Scenes:)
 - [Parameters](#Parameters)
 
 ### How it works?
@@ -79,10 +80,10 @@ dataset
 
 After executed the package with:
 ```
-python3 main.py -p /home/italojs/Pictures/dataset --output ./output --new_x 200 --new_y 200 --save_box_images 1
-``` 
+python3 main.py -p /home/italojs/Pictures/dataset --output ./output --new_x 150 --new_y 150 --save_box_images 1
+```
 The package will resize the images, rewrite the xml files and create the same folder structure into `output path` with new images and xml files.
-``` 
+```
 output
 ├── boxes_images
 │   ├── boxed_IMG_20181109_165212.jpg
@@ -179,7 +180,7 @@ Here wee have the original image (650x590) an your xml:
 ```
 
 ### Resized image
-Here is the resized image (200x200) and new xml:
+Here is the resized image (150x150) and new xml:
 
 ![resized_image](images_example/IMG_20181109_165212_new.jpg)
 
@@ -238,9 +239,38 @@ Here is the resized image (200x200) and new xml:
 
 ### Boundies box image
 
-Here is a resized image (200x200), but with the boundies box drawed:
+Here is a resized image (150x150), but with the boundies box drawed:
 
 ![box_image](images_example/boxed_IMG_20181109_165212.jpg)
+
+### The Calculus Behind the Scenes:
+
+For an original image with 650x590 to be resized by 150x150
+
+- scaleX = 150/650 = 3/13
+- scaleY = 150/590 = 15/59
+
+- Original:
+
+$$x_{min} = 74$$
+
+$$y_{min} = 192$$
+
+$$x_{max} = 267$$
+
+$$y_{max} = 499$$
+
+- Scalling:
+
+$$x_{min} = 74\times 3/13 = 17.08 \approx 17$$
+
+$$y_{min} = 192\times 15/59 = 48.81\approx 49$$
+
+$$x_{max} = 267\times 3/13 = 61.62 \approx 62$$
+
+$$y_{max} = 499\times 15/59 = 126.86\approx 127$$
+
+The same calculation is used to calculate the coordinates of the bounding boxes.
 
 ## Parameters
 To know more about parameters use `python main.py -h`:
